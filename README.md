@@ -6,7 +6,7 @@
 - Open CMD in working directory.
 - Run following command.
 
-'''pip install -r requirements.txt'''
+pip install -r requirements.txt
 
 - `app.py` is the main Python file of Streamlit Application. 
 - `birds-classification.ipynb` is the Notebook file of the Training
