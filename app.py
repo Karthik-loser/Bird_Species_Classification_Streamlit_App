@@ -26,15 +26,17 @@ def run():
         page_title="Bird Species Identification"
     )
     img1 = Image.open('./meta/logo3.png')
-    img1 = img1.resize((210, 210))
+    img1 = img1.resize((300, 300))
     st.image(img1, use_column_width=False)
     st.markdown(
-        '''<h1 style='text-align: right; color: #ffffff; margin-top:-180px;'>Birds Species Identification</h1>''',
+        '''<h1 style='text-align: right; color: #ffffff;'>Birds Species Identification</h1>''',
         unsafe_allow_html=True)
     st.markdown(
-        '''<h4 style='text-align: center; color: #d73b5c; margin-top:-130px;'>Data is based "270 Bird Species "</h4>''',
+        '''<h4 style='text-align: center; color: #d73b5c;'>Data is based "270 Bird Species "</h4>''',
         unsafe_allow_html=True)
-
+    st.markdown(
+        '''<h4 style='text-align: center; color: #d73b5c;'>Uploaded Image should be named with only numbers ex: 123.jpg or 09876543.png  "</h4>''',
+        unsafe_allow_html=True)
     img_file = st.file_uploader("Choose an Image of Bird", type=["jpg", "png"])
     if img_file is not None:
         st.image(img_file, use_column_width=False)
