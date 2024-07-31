@@ -20,33 +20,82 @@ def processed_img(img_path):
     res = lab[y]
     return res
 
+import streamlit as st
+from PIL import Image
+
 def run():
+
     st.set_page_config(
         page_icon="./meta/logo3.png",
         page_title="Bird Species Identification"
     )
+
     img1 = Image.open('./meta/logo3.png')
     img1 = img1.resize((300, 300))
-    st.image(img1, use_column_width=False)
+    
     st.markdown(
-        '''<h1 style='color: #ffffff;'>Birds Species Identification</h1>''',
-        unsafe_allow_html=True)
-    st.markdown(
-        '''<h4 style='color: #d73b5c;'>Data is based "270 Bird Species "</h4>''',
-        unsafe_allow_html=True)
-    st.markdown(
-        '''<h4 style='color: #d73b5c;'>Uploaded Image should be named with only numbers ex: 123.jpg or 09876543.png  "</h4>''',
-        unsafe_allow_html=True)
+        '''
+        <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+        .container h1, .container h4 {
+            margin: 10px;
+        }
+        @media (max-width: 600px) {
+            .container h1 {
+                font-size: 24px;
+            }
+            .container h4 {
+                font-size: 16px;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1200px) {
+            .container h1 {
+                font-size: 32px;
+            }
+            .container h4 {
+                font-size: 20px;
+            }
+        }
+        @media (min-width: 1201px) {
+            .container h1 {
+                font-size: 40px;
+            }
+            .container h4 {
+                font-size: 24px;
+            }
+        }
+        </style>
+        <div class="container">
+            <h1>Birds Species Identification</h1>
+            <img src="./meta/logo3.png" />
+            <h4>Data is based on "270 Bird Species"</h4>
+            <h4>Uploaded Image should be named with only numbers ex: 123.jpg or 09876543.png</h4>
+        </div>
+        ''',
+        unsafe_allow_html=True
+    )
+
     img_file = st.file_uploader("Choose an Image of Bird", type=["jpg", "png"])
     if img_file is not None:
-        st.image(img_file, use_column_width=False)
-        save_image_path = './upload_images/' + img_file.name
-        with open(save_image_path, "wb") as f:
-            f.write(img_file.getbuffer())
+        st.image(img_file, use_column_width=True)
+        save_image_path = save_uploaded_file(img_file)
+        if save_image_path:
+            if st.button("Predict"):
+                result = processed_img(save_image_path)
+                st.success("Predicted Bird is: " + result)
 
-        if st.button("Predict"):
-            result = processed_img(save_image_path)
-            st.success("Predicted Bird is: " + result)
             
 if __name__ == "__main__":
     run()
