@@ -35,7 +35,7 @@ def run():
         '''<h4 style='color: #d73b5c;'>Data is based "270 Bird Species "</h4>''',
         unsafe_allow_html=True)
     st.markdown(
-        '''<h4 style='color: #d73b5c;'>Uploaded Image should be named with only numbers ex: 123.jpg or 09876543.png  "</h4>''',
+        '''<h4 style='color: #d73b5c;'>Uploaded Image should be named with only numbers ex: 123.jpg or 09876543.png </h4>''',
         unsafe_allow_html=True)
     img_file = st.file_uploader("Choose an Image of Bird", type=["jpg", "png"])
     if img_file is not None:
